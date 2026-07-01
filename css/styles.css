@@ -4,8 +4,8 @@
    ============================================================ */
 
 @font-face {
-    font-family: "newtemplate";
-    src: url("../assets/fonts/xiaolai-subset.woff2") format("woff2");
+    font-family: "wasted-vindey";
+    src: url("../assets/fonts/wasted-vindey.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -24,9 +24,9 @@
     --color-gold: #866739;
     --color-ink: #2a2a2a;
     --color-border: #ac9778;
-    --font-body: "newtemplate", Georgia, "Times New Roman", serif;
-    --font-display: "newtemplate", Georgia, serif;
-    --font-cursive: "weddingday", "newtemplate", Georgia, serif;
+    --font-body: "wasted-vindey", Georgia, "Times New Roman", serif;
+    --font-display: "wasted-vindey", Georgia, serif;
+    --font-cursive: "weddingday", "wasted-vindey", Georgia, serif;
     --font-hero: "Cormorant Garamond", "EB Garamond", Georgia, serif;
     --font-hero-alt: "EB Garamond", "Cormorant Garamond", Georgia, serif;
     --color-brown: #3f2a17;
@@ -251,7 +251,7 @@ body.is-opening .envelope-gate::after {
     width: 100%;
     z-index: 15;
     text-align: center;
-    font-family: "newtemplate", Georgia, serif;
+    font-family: "wasted-vindey", Georgia, serif;
     font-size: clamp(0.72rem, 2.8vw, 0.95rem);
     letter-spacing: 0.28em;
     color: #866739;
