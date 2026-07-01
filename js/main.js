@@ -31,6 +31,8 @@
     const REVEAL_DELAY_MS = prefersReducedMotion ? 0 : 1600;
     const OPEN_TOTAL_MS = prefersReducedMotion ? 50 : 2400;
     const GATE_HIDE_MS = prefersReducedMotion ? 80 : 3800;
+    const RSVP_TIMEOUT_MS = 15000;
+    const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbwhFK1s4jfTVa1vaEErP98xzWKVN3JdE2f9ehSlVPxKNWY-CN0y3Ng2vR1v8ZkxIo6o/exec";
 
     let opened = false;
 
@@ -252,9 +254,18 @@
         }
 
         const submitButton = rsvpForm.querySelector("button[type='submit']");
-        const defaultLabel = submitButton ? submitButton.textContent : "";
+        const honeypotField = rsvpForm.querySelector("input[name='website']");
+        const defaultLabel = "Submit RSVP";
 
-        rsvpForm.addEventListener("submit", function (event) {
+        function setSubmitState(label, disabled) {
+            if (!submitButton) {
+                return;
+            }
+            submitButton.textContent = label;
+            submitButton.disabled = disabled;
+        }
+
+        rsvpForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
             if (!rsvpForm.checkValidity()) {
@@ -262,14 +273,66 @@
                 return;
             }
 
-            rsvpSuccess.hidden = false;
-
-            if (submitButton && defaultLabel) {
-                submitButton.textContent = "Submitted";
-                window.setTimeout(function () {
-                    submitButton.textContent = defaultLabel;
-                }, 2200);
+            if (rsvpSuccess) {
+                rsvpSuccess.hidden = true;
             }
+
+            if (honeypotField && honeypotField.value.trim()) {
+                if (rsvpSuccess) {
+                    rsvpSuccess.hidden = false;
+                    rsvpSuccess.textContent = "Thank you! Your RSVP has been received.";
+                }
+                setSubmitState("Submitted", false);
+                return;
+            }
+
+            setSubmitState("Submitting...", true);
+
+            try {
+                const formData = new FormData(rsvpForm);
+                const controller = new AbortController();
+                const timeoutId = window.setTimeout(function () {
+                    controller.abort();
+                }, RSVP_TIMEOUT_MS);
+
+                if (!formData.has("message")) {
+                    formData.append("message", "");
+                }
+
+                formData.append("source", "github-pages-test");
+                formData.append("userAgent", navigator.userAgent);
+
+                await fetch(RSVP_ENDPOINT, {
+                    method: "POST",
+                    body: formData,
+                    mode: "no-cors",
+                    signal: controller.signal
+                });
+
+                window.clearTimeout(timeoutId);
+
+                if (rsvpSuccess) {
+                    rsvpSuccess.hidden = false;
+                    rsvpSuccess.textContent = "Thank you! Your RSVP has been received.";
+                }
+
+                setSubmitState("Submitted", false);
+            } catch (_) {
+                if (rsvpSuccess) {
+                    rsvpSuccess.hidden = false;
+                    rsvpSuccess.textContent = "Something went wrong while submitting. Please try again.";
+                }
+
+                setSubmitState("Try Again", false);
+                window.setTimeout(function () {
+                    setSubmitState(defaultLabel, false);
+                }, 2200);
+                return;
+            }
+
+            window.setTimeout(function () {
+                setSubmitState(defaultLabel, false);
+            }, 2200);
         });
     }
 
