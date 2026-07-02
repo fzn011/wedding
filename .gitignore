@@ -15,3 +15,5 @@ dist/
 
 # Temp files
 *.zip
+
+# Force Pages rebuild
