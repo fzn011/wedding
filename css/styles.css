@@ -506,11 +506,11 @@ body.mood-night .hero-overlay {
 @keyframes heroFadeUpShift {
     from {
         opacity: 0;
-        transform: translateY(22px) translateX(16px);
+        transform: translateY(22px);
     }
     to {
         opacity: 1;
-        transform: translateY(0) translateX(16px);
+        transform: translateY(0);
     }
 }
 
@@ -543,12 +543,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 }
 
 .hero-divider {
-    width: min(55%, 190px);
-    height: auto;
-    opacity: 0;   /* overridden by is-open animation */
-    display: block;
-    margin: 0.6rem auto;
-    filter: sepia(1) saturate(2) hue-rotate(-8deg) brightness(0.45);
+    display: none;
 }
 
 /* Desktop: keep the vertical mobile-style frame, centered */
