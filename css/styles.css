@@ -534,7 +534,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 /* Typography */
 .hero-names {
     font-family: var(--font-cursive);
-    font-size: clamp(2.9rem, 12.5vw, 4.3rem);
+    font-size: clamp(2.7rem, 11.5vw, 4.2rem);
     font-weight: 400;
     color: var(--color-brown);
     letter-spacing: 0.01em;
