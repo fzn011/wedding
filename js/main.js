@@ -255,7 +255,6 @@
 
         const submitButton = rsvpForm.querySelector("button[type='submit']");
         const honeypotField = rsvpForm.querySelector("[name='website']");
-        const defaultLabel = "Submit RSVP";
 
         function setSubmitState(label, disabled) {
             if (!submitButton) {
@@ -298,7 +297,7 @@
                     formData.append("message", "");
                 }
 
-                formData.append("source", "github-pages");
+                formData.append("source", "github-pages-client-live-fzn011-v3");
                 formData.append("userAgent", navigator.userAgent);
 
                 await fetch(RSVP_ENDPOINT, {
