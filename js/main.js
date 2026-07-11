@@ -10,7 +10,6 @@
     const gate = document.getElementById("envelope-gate");
     const seal = document.getElementById("open-envelope") || document.getElementById("seal-button");
     const siteMain = document.getElementById("site-main");
-    const heroVideo = document.querySelector(".hero-video");
     const music = document.getElementById("bg-music");
     const audioToggle = document.getElementById("audio-toggle");
     const moodToggle = document.getElementById("mood-toggle");
@@ -90,27 +89,6 @@
         }
     }
 
-    function activateHeroVideo() {
-        if (!heroVideo || heroVideo.dataset.active === "true") {
-            return;
-        }
-
-        const dataSrc = heroVideo.getAttribute("data-src");
-        if (dataSrc && !heroVideo.getAttribute("src")) {
-            heroVideo.setAttribute("src", dataSrc);
-            heroVideo.load();
-        }
-
-        const playPromise = heroVideo.play();
-        if (playPromise && typeof playPromise.catch === "function") {
-            playPromise.catch(function () {
-                // Ignore autoplay rejection; video remains available once interaction allows playback.
-            });
-        }
-
-        heroVideo.dataset.active = "true";
-    }
-
     function openEnvelope() {
         if (opened) {
             return;
@@ -127,7 +105,6 @@
         }, prefersReducedMotion ? 80 : 900);
 
         // 2. Start music (user gesture makes autoplay legal here).
-        activateHeroVideo();
         startMusic();
 
         // 3. Reveal the main site after the initial flap movement starts.
@@ -159,7 +136,6 @@
     // Desktop / PC: skip the envelope gate entirely and show the site.
     if (window.matchMedia("(min-width: 1025px)").matches) {
         opened = true;
-        activateHeroVideo();
         siteMain.hidden = false;
         siteMain.setAttribute("aria-hidden", "false");
         body.classList.add("is-open");
@@ -354,9 +330,7 @@
             return;
         }
 
-        const starCount = window.matchMedia("(max-width: 430px)").matches
-            ? 72
-            : (window.matchMedia("(max-width: 768px)").matches ? 92 : 120);
+        const starCount = 120;
         const fragment = document.createDocumentFragment();
 
         function edgeBiasedPosition() {
