@@ -76,7 +76,7 @@ body {
     line-height: 1.6;
     color: var(--color-ink);
     background-color: var(--color-paper);
-    background-image: url("../assets/intro/bg-ivory-paper.webp");
+    background-image: url("../assets/intro/bg-ivory-paper-optimized.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -116,7 +116,7 @@ body:not(.is-open) {
     position: absolute;
     inset: 0;
     background:
-        url("../assets/intro/bg-ivory-paper.webp") center / cover no-repeat,
+        url("../assets/intro/bg-ivory-paper-optimized.webp") center / cover no-repeat,
         linear-gradient(135deg, #f9f5ee 0%, #ede8de 100%);
     opacity: 1;
 }
@@ -185,7 +185,7 @@ body.is-opening .envelope-gate::after {
     position: absolute;
     inset: 0;
     border-radius: 2px;
-    background: url("../assets/intro/bg-ivory-paper.webp") center / cover no-repeat, #f9f5ee;
+    background: url("../assets/intro/bg-ivory-paper-optimized.webp") center / cover no-repeat, #f9f5ee;
 }
 
 .figma-flap,
