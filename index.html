@@ -348,15 +348,19 @@
                     </label>
                 </fieldset>
 
-                <div class="rsvp-honeypot" aria-hidden="true">
-                    <label for="rsvp-website">Website</label>
-                    <input id="rsvp-website" type="text" name="website" tabindex="-1" autocomplete="off" />
-                </div>
+                <label class="rsvp-honeypot" aria-hidden="true">
+                    <span>Website</span>
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+                </label>
 
                 <button type="submit" class="rsvp-submit">Submit RSVP</button>
 
                 <p class="rsvp-success" id="rsvp-success" hidden>
                     Thank you. Your response has been noted for now.
+                </p>
+
+                <p class="rsvp-success" id="rsvp-error" hidden>
+                    Something went wrong. Please try again.
                 </p>
             </form>
         </section>
